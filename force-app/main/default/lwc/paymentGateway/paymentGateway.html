@@ -1,0 +1,91 @@
+<template>
+   <template if:true={blogFieldValue}>
+    <lightning-card   title="Please Select Strip Gatway For This Subscription">
+        <div style="margin-left:3%;">
+            <lightning-radio-group label="Select Payment Gateway" 
+                                    name="radioButtonGroup" 
+                                    onchange={handleChange} 
+                                    options={options}
+                                    value={selectedValue}
+                                    type="radio"
+                                    checked="true"
+                                    >
+                                </lightning-radio-group>
+        </div>
+           <br>
+           <div>
+        <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick={handleClick1} title="Cancel">Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={handleClick} title="Next">Next</button>
+        </footer>
+           </div>
+    </lightning-card>
+  </template>
+    <template if:false={blogFieldValue5}>
+    <lightning-card   title="Products List">
+      <div style="margin-left:3%;">
+      <lightning-datatable 
+      data={wireProduct} 
+      columns={columns} 
+      key-field="id"  
+      onrowselection={handleRowSelection}
+      type="radio"
+      >
+     </lightning-datatable>
+     <div>
+      <footer class="slds-modal__footer">
+          <button class="slds-button slds-button_neutral" onclick={handleClick1} title="Back">Back</button>
+          <button class="slds-button slds-button_brand" onclick={handleClick} title="Next">Next</button>
+      </footer>
+         </div>
+    </div>
+    </lightning-card>
+   </template>
+  
+    <template if:false={blogFieldValue1}>
+        <h3 class="slds-text-heading_medium slds-text-color_success"><strong>Paytm Card Payment</strong></h3> 
+        <p class="slds-var-p-around_small">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-input name="firstName" class="validate" type="text" label="Card Holder Name" required></lightning-input>
+                    <lightning-input name="Number" class="validate" type="number" label="Card Number" required></lightning-input>
+                    <lightning-input name="CVV" class="validate" type="number" label="CVV" required></lightning-input>
+                   
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-input name="Date" class="validate" type="date" label="Expiry Date" required></lightning-input>
+                    <lightning-input name="text" class="validate" type="text" label="Reprt" required></lightning-input>
+                    <lightning-input name="phone" class="validate" type="number" label="Phone" required></lightning-input>
+                    <lightning-input name="Nick" class="validate" type="text" label="Nick Name"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-var-p-top_small">
+                    <lightning-button class="slds-align_absolute-center" label="Make" onclick={createContact}></lightning-button>    
+                </lightning-layout-item>
+            </lightning-layout>
+        </p>
+    </template>
+    <template if:false={blogFieldValue3}>
+      <!-- Modal/Popup Box LWC starts here -->
+      <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+            <header class="slds-modal__header slds-modal__header_empty">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+              <h3 class="slds-text-heading_medium slds-text-color--error"><strong>Stripe Product Id Not Exist</strong></h3> 
+              <p>Products you intend to create the Stripe subscription with must exist in Stripe, however, some of the products on this opportunity are not yet ‘Pushed to Stripe.’ This is okay if you wish to proceed with only some Products forming the subscription but at least one Product must exist in Stripe to create a Subscription </p> 
+          </div>
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        
+  </template>
+    </template>
